@@ -19,6 +19,7 @@ jdbc:
 mybatis_config_file: mybatis-config.xml
 mapper_path: /mapper/**.xml
 type_alias_package: com.imooc.first.entity
+type_base_package: com.imooc.first.dao
 
 spring:
   redis:
@@ -26,3 +27,24 @@ spring:
     host: 192.168.33.10
     password: root
     port: 6379
+
+masterdb:
+  druid:
+    #url: jdbc:mysql://rm-bp1wp84ot5b11c6q1o.mysql.rds.aliyuncs.com:3306/depository-test?useUnicode=true&autoReconnect=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
+    url: jdbc:mysql://rm-bp1wp84ot5b11c6q1o.mysql.rds.aliyuncs.com:3306/womaodev?useUnicode=true&autoReconnect=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
+    username: womaomain
+    password: '@Womaojr'
+    driver-class-name: com.mysql.jdbc.Driver
+    filters: stat
+    max-active: 20
+    min-idle: 2
+    initial-size: 2
+    max-wait: 60000
+    time-between-eviction-runs-millis:  60000
+    min-evictable-idle-time-millis: 300000
+    validation-query: select 1
+    test-while-idle:  true
+    test-on-borrow: false
+    test-on-return: false
+    pool-prepared-statements: true
+    max-open-prepared-statements: 20

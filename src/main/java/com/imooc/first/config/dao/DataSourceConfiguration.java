@@ -6,7 +6,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import com.mchange.v2.c3p0.ComboPooledDataSource;
+//import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 /**
  * 配置datasource到ioc容器里面
@@ -14,7 +14,7 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
  * @author xiangze
  *
  */
-@Configuration
+//@Configuration
 // 配置mybatis mapper的扫描路径
 @MapperScan("com.imooc.first.dao")
 public class DataSourceConfiguration {
@@ -33,7 +33,7 @@ public class DataSourceConfiguration {
      * @return
      * @throws PropertyVetoException
      */
-    @Bean(name = "dataSource")
+    /*@Bean(name = "dataSource")
     public ComboPooledDataSource createDataSource() throws PropertyVetoException {
         // 生成datasource实例
         ComboPooledDataSource dataSource = new ComboPooledDataSource();
@@ -58,6 +58,6 @@ public class DataSourceConfiguration {
         // 连接失败重试次数
         dataSource.setAcquireRetryAttempts(2);
         return dataSource;
-    }
+    }*/
 
 }

@@ -33,7 +33,7 @@ public class AreaServiceImpl implements AreaService {
     @Transactional
     @Override
     public boolean addArea(Area area) {
-
+        logger.info(area.toString());
         if(area.getAreaName() != null && !"".equals(area.getAreaName())) {
             area.setCreateTime(new Date());
             area.setLastEditTime(new Date());

@@ -1,7 +1,7 @@
 package com.imooc.first.web;
 
-import com.imooc.first.entity.Area;
-import com.imooc.first.service.AreaService;
+import com.imooc.first.model.Area;
+import com.imooc.first.service.core.AreaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -51,4 +51,6 @@ public class AreaController {
         modelMap.put("success",areaService.deleteArea(areaId));
         return modelMap;
     }
+
+
 }

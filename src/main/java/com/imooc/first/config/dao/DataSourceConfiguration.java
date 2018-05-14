@@ -2,13 +2,14 @@ package com.imooc.first.config.dao;
 
 import java.beans.PropertyVetoException;
 
+//import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-//import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 /**
+ * 这个是c3p0的
  * 配置datasource到ioc容器里面
  *
  * @author xiangze
@@ -16,7 +17,7 @@ import org.springframework.context.annotation.Configuration;
  */
 //@Configuration
 // 配置mybatis mapper的扫描路径
-@MapperScan("com.imooc.first.dao")
+//@MapperScan("com.imooc.first.dao")
 public class DataSourceConfiguration {
     @Value("${jdbc.driver}")
     private String jdbcDriver;

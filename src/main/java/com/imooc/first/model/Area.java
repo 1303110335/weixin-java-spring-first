@@ -1,4 +1,4 @@
-package com.imooc.first.entity;
+package com.imooc.first.model;
 
 import java.util.Date;
 

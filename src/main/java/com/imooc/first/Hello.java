@@ -1,7 +1,7 @@
 package com.imooc.first;
 
 import com.imooc.first.dao.AreaDao;
-import com.imooc.first.entity.Area;
+import com.imooc.first.model.Area;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

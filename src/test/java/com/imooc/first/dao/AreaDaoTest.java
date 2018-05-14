@@ -1,6 +1,6 @@
 package com.imooc.first.dao;
 
-import com.imooc.first.entity.Area;
+import com.imooc.first.model.Area;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;

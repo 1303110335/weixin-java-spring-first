@@ -13,7 +13,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 
-//@Configuration
+@Configuration
 public class SessionFactoryConfiguration {
     // mybatis-config.xml配置文件的路径
     private static String mybatisConfigFile;

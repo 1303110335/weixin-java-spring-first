@@ -1,8 +1,8 @@
-package com.imooc.first.service.impl;
+package com.imooc.first.service.core.impl;
 
 import com.imooc.first.dao.AreaDao;
-import com.imooc.first.entity.Area;
-import com.imooc.first.service.AreaService;
+import com.imooc.first.model.Area;
+import com.imooc.first.service.core.AreaService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

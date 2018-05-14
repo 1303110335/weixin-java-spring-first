@@ -1,6 +1,6 @@
-package com.imooc.first.service;
+package com.imooc.first.service.core;
 
-import com.imooc.first.entity.Area;
+import com.imooc.first.model.Area;
 
 import java.util.List;
 

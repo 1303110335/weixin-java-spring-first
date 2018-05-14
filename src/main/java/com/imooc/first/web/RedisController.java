@@ -1,6 +1,6 @@
 package com.imooc.first.web;
 
-import com.imooc.first.entity.SysUser;
+import com.imooc.first.model.SysUser;
 import com.imooc.first.utils.IMoocJSONResult;
 import com.imooc.first.utils.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;

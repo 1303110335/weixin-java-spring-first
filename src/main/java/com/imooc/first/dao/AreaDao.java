@@ -2,7 +2,7 @@ package com.imooc.first.dao;
 
 import java.util.List;
 
-import com.imooc.first.entity.Area;
+import com.imooc.first.model.Area;
 
 public interface AreaDao {
     /**

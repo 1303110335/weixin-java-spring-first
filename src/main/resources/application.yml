@@ -1,50 +1,16 @@
-server:
-  port: 8080
-#加入/demo前缀
-server:
-  servlet:
-    context-path: /first
-#DataSource
-#数据库驱动
-jdbc:
-  driver: com.mysql.jdbc.Driver
-#数据库链接
-  url: jdbc:mysql://192.168.33.10:3306/test?useUnicode=true&characterEncoding=utf8&useSSL=false
-#数据库用户名
-  username: root
-#数据库密码
-  password: 123456
+spring:
+  profiles:
+    #起作用的配置文件 application-{dev,test,product}.yml
+    active: dev
+    #active: test
+    #active: product
 
 #Mybatis
 mybatis_config_file: mybatis-config.xml
 mapper_path: /mapper/**.xml
-type_alias_package: com.imooc.first.entity
-type_base_package: com.imooc.first.dao
+type_alias_package: com.imooc.first.model
 
-spring:
-  redis:
-    database: 0
-    host: 192.168.33.10
-    password: root
-    port: 6379
-
-masterdb:
-  druid:
-    #url: jdbc:mysql://rm-bp1wp84ot5b11c6q1o.mysql.rds.aliyuncs.com:3306/depository-test?useUnicode=true&autoReconnect=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
-    url: jdbc:mysql://rm-bp1wp84ot5b11c6q1o.mysql.rds.aliyuncs.com:3306/womaodev?useUnicode=true&autoReconnect=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
-    username: womaomain
-    password: '@Womaojr'
-    driver-class-name: com.mysql.jdbc.Driver
-    filters: stat
-    max-active: 20
-    min-idle: 2
-    initial-size: 2
-    max-wait: 60000
-    time-between-eviction-runs-millis:  60000
-    min-evictable-idle-time-millis: 300000
-    validation-query: select 1
-    test-while-idle:  true
-    test-on-borrow: false
-    test-on-return: false
-    pool-prepared-statements: true
-    max-open-prepared-statements: 20
+# 打印sql
+logging:
+  level:
+    com.imooc.first.dao: DEBUG

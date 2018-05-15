@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.core.task.TaskExecutor;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -41,9 +42,6 @@ public class SmsMessageService {
 
     @Autowired
     private TaskExecutor taskExecutor;
-
-//    @Autowired
-//    private TaskExecutor taskExecutor;
 
     /**
      * 短信发送限制
@@ -95,17 +93,17 @@ public class SmsMessageService {
             });
         }
 
-//        smsTimes.orElseGet(() -> {
-//            CompletableFuture.supplyAsync(() -> {
+        smsTimes.orElseGet(() -> {
+            CompletableFuture.supplyAsync(() -> {
         System.out.println("key:" + ConstantUtils.WALLET_SMS_NUM_PREFIX + mobile + " value:" + "1" + "&" + DateUtils.getCurrentTime());
                 redisService.set(ConstantUtils.WALLET_SMS_NUM_PREFIX + mobile, "1" + "&" + DateUtils.getCurrentTime(),
                         nStoreSmsTime);
                 redisService.set(ConstantUtils.WALLET_SMS_FIRST_TIME_PREFIX + mobile, String.valueOf(System.currentTimeMillis()),
                         nStoreSmsTime);
-//                return null;
-//            }, taskExecutor);
-//            return null;
-//        });
+                return null;
+            }, taskExecutor);
+            return null;
+        });
 
         return resp;
     }

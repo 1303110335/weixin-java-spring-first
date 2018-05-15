@@ -25,3 +25,9 @@
 /.nb-gradle/
 .mvn/
 mvnw
+
+classes/
+hs_err_pid3528.log
+hs_err_pid7152.log
+replay_pid3528.log
+replay_pid7152.log

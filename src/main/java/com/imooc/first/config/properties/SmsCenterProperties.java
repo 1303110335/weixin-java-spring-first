@@ -4,7 +4,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConfigurationProperties(prefix = "servers.smsCenter")
+@ConfigurationProperties(prefix = "servers.sms-center")
 public class SmsCenterProperties {
     private String host;
 

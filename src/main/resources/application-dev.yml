@@ -1,5 +1,10 @@
 server:
   port: 8080
+  security:
+    host:
+  smsCenter:
+    #短信接口
+    host: http://127.0.0.1:8073/api/sms/
 #加入/demo前缀
 #server:
 #  servlet:
@@ -34,3 +39,4 @@ masterdb:
     test-on-return: false
     pool-prepared-statements: true
     max-open-prepared-statements: 20
+

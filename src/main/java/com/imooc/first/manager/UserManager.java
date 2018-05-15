@@ -12,6 +12,7 @@ import com.imooc.first.service.sms.SmsMessageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -24,6 +25,9 @@ public class UserManager {
 
     @Autowired
     private SmsMessageService smsMessageService;
+
+    @Value("${spring.profiles.active}")
+    private String active;
 
 
     public BaseResp getSmsCode(final GetSmsCodeReq getSmsCodeReq) {
@@ -46,8 +50,14 @@ public class UserManager {
             return resp;
         }
 
+        //获取短信验证码
+        final String smsCode = smsMessageService.getSmsCode(getSmsCodeReq.getMobile());
 
+        if (ConstantUtils.PRODUCT_ENV_KEY.equals(active)) {
+            smsMessageService.sendCode(getSmsCodeReq.getMobile(), smsCode, 2001, getSmsCodeReq.getDeviceType());
+        }
 
-        return BaseResp.create(ResultCode.NORMAL);
+        resp = ConstantUtils.PRODUCT_ENV_KEY.equals(active) ? BaseResp.create("123456") : BaseResp.create("123456");
+        return resp;
     }
 }

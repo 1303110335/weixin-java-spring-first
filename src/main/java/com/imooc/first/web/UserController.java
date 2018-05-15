@@ -1,7 +1,9 @@
 package com.imooc.first.web;
 
 import com.imooc.first.api.req.user.GetSmsCodeReq;
+import com.imooc.first.api.req.user.LoginReq;
 import com.imooc.first.api.resp.BaseResp;
+import com.imooc.first.api.resp.LoginResp;
 import com.imooc.first.common.utils.ResultCode;
 import com.imooc.first.common.utils.VerifyUtils;
 //import com.imooc.first.manager.UserManager;
@@ -40,12 +42,16 @@ public class UserController {
     @Autowired
     private SUserService sUserService;
 
-    @RequestMapping(value = "smsCode", method = RequestMethod.GET)
+    @RequestMapping(value = "/smsCode", method = RequestMethod.GET)
     public BaseResp getSmsCode(@Valid GetSmsCodeReq req)
     {
         return userManager.getSmsCode(req);
     }
 
-
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public BaseResp<LoginResp> login(@Valid LoginReq loginReq)
+    {
+        return userManager.login(loginReq);
+    }
 
 }

@@ -50,7 +50,7 @@ public class SUser {
     private Date modifyTime;
     private Long modifyUserId;
     private String province;
-    private Integer inviterId;
+    private Long inviterId;
     /**
      * 邀请人手机号
      */
@@ -407,11 +407,11 @@ public class SUser {
         this.province = province;
     }
 
-    public Integer getInviterId() {
+    public Long getInviterId() {
         return inviterId;
     }
 
-    public void setInviterId(Integer inviterId) {
+    public void setInviterId(Long inviterId) {
         this.inviterId = inviterId;
     }
 

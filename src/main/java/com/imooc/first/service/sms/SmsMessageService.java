@@ -140,4 +140,15 @@ public class SmsMessageService {
             return null;
         }, taskExecutor);
     }
+
+    /**
+     * 判断短信验证码是否正确
+     * @param mobile
+     * @param mobileAuthCode
+     * @return
+     */
+    public boolean verifySmsCode(String mobile, String mobileAuthCode) {
+        String code = redisService.get("SMS_CODE_" + mobile);
+        return mobileAuthCode.equals(code);
+    }
 }

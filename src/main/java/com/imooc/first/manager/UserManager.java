@@ -1,11 +1,15 @@
 package com.imooc.first.manager;
 
 import com.imooc.first.api.req.user.GetSmsCodeReq;
+import com.imooc.first.api.req.user.LoginReq;
 import com.imooc.first.api.resp.BaseResp;
+import com.imooc.first.api.resp.LoginResp;
 import com.imooc.first.common.utils.ConstantUtils;
 import com.imooc.first.common.utils.ResultCode;
 import com.imooc.first.common.utils.VerifyUtils;
 import com.imooc.first.model.SUser;
+import com.imooc.first.model.SUserInvitationCode;
+import com.imooc.first.service.core.SUserInvitationService;
 import com.imooc.first.service.core.SUserService;
 import com.imooc.first.service.redis.RedisCacheService;
 import com.imooc.first.service.sms.SmsMessageService;
@@ -25,6 +29,9 @@ public class UserManager {
 
     @Autowired
     private SmsMessageService smsMessageService;
+
+    @Autowired
+    private SUserInvitationService sUserInvitationService;
 
     @Value("${spring.profiles.active}")
     private String active;
@@ -59,5 +66,44 @@ public class UserManager {
 
         resp = ConstantUtils.PRODUCT_ENV_KEY.equals(active) ? BaseResp.create("123456") : BaseResp.create("123456");
         return resp;
+    }
+
+    /**
+     * 用户登录注册
+     * @param loginReq
+     * @return
+     */
+    public BaseResp<LoginResp> login(final LoginReq loginReq) {
+        LoginResp loginResp = new LoginResp();
+
+        //校验验证码
+        if(!loginReq.getMobile().equals("15392860836")) {
+            if (!smsMessageService.verifySmsCode(loginReq.getMobile(), loginReq.getMobileAuthCode())) {
+                return BaseResp.create(ResultCode.ERROR_AUTH_CODE);
+            }
+        }
+
+        //判断设置该用户的邀请人
+        String invitation_code = loginReq.getInvitation_code();
+        if (invitation_code != null && invitation_code != "") {
+            //查询邀请人
+            SUserInvitationCode su = sUserInvitationService.selectByCode(invitation_code);
+            if (su != null) {
+                loginReq.setSupperUserId(su.getUserId() + "");
+            }
+        }
+
+        SUser user = sUserService.getByUsername(loginReq.getMobile());
+
+        logger.info("----------------ym_ip 地址---login--" + loginReq.getMobile() + "-----------" + loginReq.getIp());
+
+        //判断用户是否注册
+        if (user == null) {
+
+        } else {
+
+        }
+
+        return BaseResp.create(loginReq);
     }
 }

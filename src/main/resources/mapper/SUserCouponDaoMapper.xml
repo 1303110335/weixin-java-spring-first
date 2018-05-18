@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imooc.first.dao.SUserCouponDao">
+	<resultMap type="com.imooc.first.model.SUserCoupon" id="sUserCouponMap">
+		<result property="id" column="id" />
+		<result property="userId" column="user_id" />
+		<result property="couponId" column="coupon_id" />
+		<result property="investDetailId" column="invest_detail_id" />
+		<result property="rechargeNo" column="recharge_no" />
+		<result property="fromRechargeNo" column="from_recharge_no" />
+		<result property="finalDay" column="final_day" />
+		<result property="finalAmount" column="final_amount" />
+		<result property="redemptionCode" column="redemption_code" />
+		<result property="gainTime" column="gain_time" />
+		<result property="expireTime" column="expire_time" />
+		<result property="lotterySceneType" column="lottery_scene_type" />
+		<result property="status" column="status" />
+		<result property="sourceType" column="source_type" />
+		<result property="addTime" column="add_time" />
+		<result property="addUserId" column="add_user_id" />
+		<result property="modifyTime" column="modify_time" />
+		<result property="modifyUserId" column="modify_user_id" />
+		<result property="isDeleted" column="is_deleted" />
+
+	</resultMap>
+	<resultMap type="com.imooc.first.api.resp.activity.UserCouponBean" id="sUserCouponExtendMap">
+		<result property="id" jdbcType="INTEGER" column="id" />
+		<result property="type" jdbcType="INTEGER" column="type" />
+		<result property="status" jdbcType="INTEGER" column="status" />
+		<result property="title" jdbcType="VARCHAR" column="title" />
+		<result property="brief" jdbcType="VARCHAR" column="brief" />
+		<result property="desc" jdbcType="VARCHAR" column="desc" />
+		<result property="tag" jdbcType="VARCHAR" column="tag" />
+		<result property="gainTime" jdbcType="TIMESTAMP" column="gain_time" />
+		<result property="startTime" jdbcType="TIMESTAMP" column="startTime" />
+		<result property="endTime" jdbcType="TIMESTAMP" column="endTime" />
+		<result property="amount" jdbcType="DECIMAL" column="amount" />
+		<result property="rate" jdbcType="DECIMAL" column="rate" />
+		<result property="redemptionCode" jdbcType="VARCHAR" column="redemption_code" />
+		<result property="image" jdbcType="VARCHAR" column="image" />
+		<result property="amountUpperLimit" jdbcType="DECIMAL"
+			column="amount_upper_limit" />
+		<result property="amountLowerLimit" jdbcType="DECIMAL"
+			column="amount_lower_limit" />
+		<result property="dayUpperLimit" jdbcType="INTEGER" column="day_upper_limit" />
+		<result property="dayLowerLimit" jdbcType="INTEGER" column="day_lower_limit" />
+
+		<result property="rateDaysDesc" jdbcType="VARCHAR" column="rateDaysDesc" />
+		<result property="rateDays" jdbcType="INTEGER" column="rateDays" />
+		<result property="rateDaysPercent" jdbcType="INTEGER" column="rateDaysPercent" />
+		<result property="rateAmount" jdbcType="DECIMAL" column="rateAmount" />
+		<result property="rechargeNo" column="rechargeNo" />
+		<result property="finalDay" column="final_day" />
+		<result property="finalAmount" column="final_amount" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		suc.id,
+		sc.type,
+		suc.`status`,
+		sc.title,
+		sc.brief,
+		sc.`desc`,
+		sc.tag,
+		suc.gain_time,
+		suc.gain_time as startTime,
+		suc.expire_time as
+		endTime,
+		sc.amount,
+		sc.rate,
+		suc.redemption_code,
+		sc.image,
+		sc.amount_upper_limit,
+		sc.amount_lower_limit,
+		sc.day_upper_limit,
+		sc.day_lower_limit,
+		sc.rate_days_desc rateDaysDesc,
+		sc.rate_days
+		rateDays,
+		sc.rate_days_percent rateDaysPercent,
+		sc.rate_amount
+		rateAmount,
+		suc.recharge_no rechargeNo,
+		suc.final_day,
+		suc.final_amount
+	</sql>
+	<select id="getByPrimaryKey" parameterType="Integer" resultMap="sUserCouponMap">
+		SELECT * FROM s_user_coupon WHERE is_deleted = 0 AND id = #{id}
+	</select>
+
+	<insert id="create" parameterType="com.imooc.first.model.SUserCoupon">
+		<selectKey resultType="Integer" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		INSERT INTO s_user_coupon
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">id,</if>
+			<if test="userId != null">user_id,</if>
+			<if test="couponId != null">coupon_id,</if>
+			<if test="investDetailId != null">invest_detail_id,</if>
+			<if test="rechargeNo != null">recharge_no,</if>
+			<if test="fromRechargeNo != null">from_recharge_no,</if>
+			<if test="finalDay != null">final_day,</if>
+			<if test="finalAmount != null">final_amount,</if>
+			<if test="redemptionCode != null">redemption_code,</if>
+			<if test="gainTime != null">gain_time,</if>
+			<if test="expireTime != null">expire_time,</if>
+			<if test="lotterySceneType != null">lottery_scene_type,</if>
+			<if test="status != null">status,</if>
+			<if test="sourceType != null">source_type,</if>
+			<if test="addTime != null">add_time,</if>
+			<if test="addUserId != null">add_user_id,</if>
+			<if test="modifyTime != null">modify_time,</if>
+			<if test="modifyUserId != null">modify_user_id,</if>
+			<if test="isDeleted != null">is_deleted,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">#{id},</if>
+			<if test="userId != null">#{userId},</if>
+			<if test="couponId != null">#{couponId},</if>
+			<if test="investDetailId != null">#{investDetailId},</if>
+			<if test="rechargeNo != null">#{rechargeNo},</if>
+			<if test="fromRechargeNo != null">#{fromRechargeNo},</if>
+			<if test="finalDay != null">#{finalDay},</if>
+			<if test="finalAmount != null">#{finalAmount},</if>
+			<if test="redemptionCode != null">#{redemptionCode},</if>
+			<if test="gainTime != null">#{gainTime},</if>
+			<if test="expireTime != null">#{expireTime},</if>
+			<if test="lotterySceneType != null">#{lotterySceneType},</if>
+			<if test="status != null">#{status},</if>
+			<if test="sourceType != null">#{sourceType},</if>
+			<if test="addTime != null">now(),</if>
+			<if test="addUserId != null">#{addUserId},</if>
+			<if test="modifyTime != null">now(),</if>
+			<if test="modifyUserId != null">#{modifyUserId},</if>
+			<if test="isDeleted != null">0</if>
+		</trim>
+	</insert>
+
+	<update id="update" parameterType="com.imooc.first.model.SUserCoupon">
+		UPDATE s_user_coupon
+		<set>
+			<if test="userId != null">user_id = #{userId},</if>
+			<if test="couponId != null">coupon_id = #{couponId},</if>
+			<if test="investDetailId != null">invest_detail_id = #{investDetailId},</if>
+			<if test="rechargeNo != null">recharge_no = #{rechargeNo},</if>
+			<if test="fromRechargeNo != null">from_recharge_no = #{fromRechargeNo},</if>
+			<if test="finalDay != null">final_day = #{finalDay},</if>
+			<if test="finalAmount != null">final_amount = #{finalAmount},</if>
+			<if test="redemptionCode != null">redemption_code = #{redemptionCode},</if>
+			<if test="gainTime != null">gain_time = #{gainTime},</if>
+			<if test="expireTime != null">expire_time = #{expireTime},</if>
+			<if test="lotterySceneType != null">lottery_scene_type = #{lotterySceneType},</if>
+			<if test="status != null">status = #{status},</if>
+			<if test="sourceType != null">source_type = #{sourceType},</if>
+			<if test="modifyTime != null">modify_time = now(),</if>
+			<if test="modifyUserId != null">modify_user_id = #{modifyUserId},</if>
+		</set>
+		WHERE id = #{id}
+		AND is_deleted = 0
+	</update>
+
+	<delete id="delete" parameterType="Integer">
+		UPDATE s_user_coupon SET
+		is_deleted = 1
+		WHERE id = #{id}
+	</delete>
+
+	<select id="count" parameterType="map" resultType="Integer">
+		SELECT count(id) FROM s_user_coupon WHERE 1 = 1 AND is_deleted = 0
+		<if test="id != null">
+			AND id = #{id}
+		</if>
+
+	</select>
+
+	<select id="get" parameterType="map" resultMap="sUserCouponMap">
+		SELECT * FROM s_user_coupon WHERE 1 = 1 AND is_deleted = 0
+		<if test="id != null">
+			AND id = #{id}
+		</if>
+		<if test="userId != null">
+			and user_id = #{userId}
+		</if>
+		<if test="add_user_id != null">
+			and add_user_id = #{add_user_id}
+		</if>
+		<if test="couponId != null">
+			and coupon_id = #{couponId}
+		</if>
+		<if test="rechargeNo != null">
+			and recharge_no = #{rechargeNo}
+		</if>
+		<if test="investDetailId != null">
+			and invest_detail_id = #{investDetailId}
+		</if>
+		<if test="status != null">
+			and status = #{status}
+		</if>
+		<if test="lotterySceneType != null">
+			and lottery_scene_type = #{lotterySceneType}
+		</if>
+		order by modify_time desc
+		limit 0, 1
+	</select>
+
+	<select id="getList" parameterType="map" resultMap="sUserCouponMap">
+		SELECT * FROM s_user_coupon WHERE 1 = 1 AND is_deleted = 0
+		<if test="id != null">
+			AND id = #{id}
+		</if>
+		<if test="userId != null">
+			and user_id = #{userId}
+		</if>
+		<if test="couponId != null">
+			and coupon_id = #{couponId}
+		</if>
+		<if test="rechargeNo != null">
+			and recharge_no = #{rechargeNo}
+		</if>
+		<if test="investDetailId != null">
+			and invest_detail_id = #{investDetailId}
+		</if>
+		<if test="status != null">
+			and status = #{status}
+		</if>
+		<if test="lotterySceneType != null">
+			and lottery_scene_type = #{lotterySceneType}
+		</if>
+		order by modify_time desc
+	</select>
+	<select id="getUsedCouponList" parameterType="map" resultMap="sUserCouponMap">
+		SELECT uc.*,coupon.title as couponName from (select * from
+		s_user_coupon where user_id=#{userId} and status=2 ) uc
+		left join
+		s_coupon coupon on coupon.id=uc.coupon_id
+		where coupon.type&gt;=2 and
+		coupon.type&lt;=3
+	</select>
+	<select id="queryUserCouponDetail" resultType="com.imooc.first.api.resp.activity.UserCouponBean"
+		parameterType="map">
+		select
+		suc.id,
+		sc.type,
+		suc.`status`,
+		sc.title,
+		sc.brief,
+		sc.`desc`,
+		sc.tag,
+		suc.gain_time as gainTime,
+		sc.start_time as startTime,
+		suc.expire_time
+		as endTime,
+		sc.amount,
+		sc.rate,
+		suc.redemption_code as redemptionCode,
+		sc.image,
+		sc.amount_upper_limit as amountUpperLimit,
+		sc.amount_lower_limit as amountLowerLimit,
+		sc.day_upper_limit as
+		dayUpperLimit,
+		sc.day_lower_limit as dayLowerLimit,
+		suc.recharge_no
+		from
+		s_user_coupon
+		suc
+		INNER JOIN s_coupon sc ON sc.id = suc.coupon_id
+		where 1
+		= 1 and
+		suc.is_deleted = 0
+		<if test="userCouponId != null">
+			and suc.id = #{userCouponId}
+		</if>
+	</select>
+	<select id="getSUserCouponList" parameterType="map" resultMap="sUserCouponMap">
+		SELECT * FROM s_user_coupon
+		WHERE 1=1 and is_deleted = 0
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="userId != null">
+			and user_id = #{userId}
+		</if>
+		<if test="couponId != null">
+			and coupon_id = #{couponId}
+		</if>
+		<if test="rechargeNo != null">
+			and recharge_no = #{rechargeNo}
+		</if>
+		<if test="investDetailId != null">
+			and invest_detail_id = #{investDetailId}
+		</if>
+		<if test="status != null">
+			and status = #{status}
+		</if>
+		<if test="lotterySceneType != null">
+			and lottery_scene_type = #{lotterySceneType}
+		</if>
+		order by modify_time desc;
+	</select>
+	<select id="queryUserCouponList" resultMap="sUserCouponExtendMap"
+		parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from s_user_coupon suc
+		INNER JOIN s_coupon sc ON sc.id = suc.coupon_id
+		and sc.type in (1, 2)
+		<if test="NoDisplayStart != null and now != null">
+			and sc.start_time &lt;= #{now}
+		</if>
+		where 1 = 1 and suc.is_deleted = 0
+		<if test="id != null">
+			and suc.id = #{id}
+		</if>
+		<if test="userId != null">
+			and suc.user_id = #{userId}
+		</if>
+		<if test="type != null">
+			and sc.type = #{type}
+		</if>
+		<!-- 已使用 -->
+		<if test="status == 2">
+			and suc.status = 2
+		</if>
+		<if test="status == 1">
+			and suc.status = 1
+		</if>
+		<!-- 待使用 -->
+		<if test="status == 1 and now != null">
+			and suc.expire_time &gt;= #{now}
+		</if>
+		<!-- 已过期 -->
+		<if test="status == 3 and now != null">
+			and suc.status = 1
+			and suc.expire_time &lt;= #{now}
+		</if>
+		<if test="startTime != null and expireTime != null">
+			and suc.expire_time &gt;= #{startTime} and suc.expire_time
+			&gt;=
+			sc.start_time
+		</if>
+		ORDER BY
+		`type` DESC,
+		amount DESC,
+		rate DESC,id
+		<if test="pageNo != null and pageNo != -10 and limit == null">
+			limit #{pageNo}, 10
+		</if>
+		<if test="pageNo != null and pageNo != -10 and limit != null">
+			limit #{pageNo}, #{limit}
+		</if>
+	</select>
+	<select id="queryToBeInvestedUserCoupon" resultMap="sUserCouponExtendMap"
+		parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from s_user_coupon suc
+		INNER JOIN s_coupon sc ON sc.id = suc.coupon_id
+		where 1 = 1 and suc.is_deleted = 0
+		and sc.type in (1, 2)
+		and suc.status
+		= #{status}
+		and suc.expire_time &gt;= #{now}
+		and sc.day_upper_limit = 0
+		<if test="userId != null">
+			and suc.user_id = #{userId}
+		</if>
+		<if test="day != null">
+			and sc.day_lower_limit &lt;= #{day}
+		</if>
+		UNION ALL
+		select
+		<include refid="Base_Column_List" />
+		from s_user_coupon suc
+		INNER JOIN s_coupon sc ON sc.id = suc.coupon_id
+		where 1 = 1 and suc.is_deleted = 0
+		and sc.type in (1, 2)
+		and suc.status
+		= #{status}
+		and suc.expire_time &gt;= #{now}
+		and sc.day_upper_limit != 0
+		<if test="userId != null">
+			and suc.user_id = #{userId}
+		</if>
+		<if test="day != null">
+			and sc.day_upper_limit &gt;= #{day}
+			and sc.day_lower_limit
+			&lt;= #{day}
+		</if>
+		ORDER BY
+		`type` DESC,
+		amount DESC,
+		rate DESC
+		<if test="pageNo != null and pageNo != -10">
+			limit #{pageNo}, 10
+		</if>
+	</select>
+	<insert id="createUserCoupon" parameterType="com.imooc.first.model.SUserCoupon">
+		<selectKey resultType="Integer" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		INSERT INTO s_user_coupon
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">id,</if>
+			<if test="userId != null">user_id,</if>
+			<if test="couponId != null">coupon_id,</if>
+			<if test="investDetailId != null">invest_detail_id,</if>
+			<if test="rechargeNo != null">recharge_no,</if>
+			<if test="fromRechargeNo != null">from_recharge_no,</if>
+			<if test="finalDay != null">final_day,</if>
+			<if test="finalAmount != null">final_amount,</if>
+			<if test="redemptionCode != null">redemption_code,</if>
+			<if test="gainTime != null">gain_time,</if>
+			<if test="expireTime != null">expire_time,</if>
+			<if test="lotterySceneType != null">lottery_scene_type,</if>
+			<if test="status != null">status,</if>
+			<if test="sourceType != null">source_type,</if>
+			<if test="addTime != null">add_time,</if>
+			<if test="addUserId != null">add_user_id,</if>
+			<if test="modifyTime != null">modify_time,</if>
+			<if test="modifyUserId != null">modify_user_id,</if>
+			<if test="isDeleted != null">is_deleted,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">#{id},</if>
+			<if test="userId != null">#{userId},</if>
+			<if test="couponId != null">#{couponId},</if>
+			<if test="investDetailId != null">#{investDetailId},</if>
+			<if test="rechargeNo != null">#{rechargeNo},</if>
+			<if test="fromRechargeNo != null">#{fromRechargeNo},</if>
+			<if test="finalDay != null">#{finalDay},</if>
+			<if test="finalAmount != null">#{finalAmount},</if>
+			<if test="redemptionCode != null">#{redemptionCode},</if>
+			<if test="gainTime != null">#{gainTime},</if>
+			<if test="expireTime != null">#{expireTime},</if>
+			<if test="lotterySceneType != null">#{lotterySceneType},</if>
+			<if test="status != null">#{status},</if>
+			<if test="sourceType != null">#{sourceType},</if>
+			<if test="addTime != null">now(),</if>
+			<if test="addUserId != null">#{addUserId},</if>
+			<if test="modifyTime != null">now(),</if>
+			<if test="modifyUserId != null">#{modifyUserId},</if>
+			<if test="isDeleted != null">0</if>
+		</trim>
+	</insert>
+</mapper>

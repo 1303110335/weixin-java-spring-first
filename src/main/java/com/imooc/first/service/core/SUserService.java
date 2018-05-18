@@ -1,6 +1,7 @@
 package com.imooc.first.service.core;
 
 import com.imooc.first.api.req.BaseReq;
+import com.imooc.first.model.SCouponPool;
 import com.imooc.first.model.SUser;
 
 import java.math.BigDecimal;
@@ -55,7 +56,7 @@ public interface SUserService {
      *
      * @param userId
      */
-    public void registerSendPersonMessage(Long userId);
+    public void registerSendPersonMessage(Long userId, SCouponPool sCouponPool);
 
     /**
      * 计算用户理论总余额

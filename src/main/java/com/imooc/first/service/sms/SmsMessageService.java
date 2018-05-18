@@ -117,7 +117,7 @@ public class SmsMessageService {
                 smsCode = "123456";
             }
         }
-        redisService.set("SMS_CODE_" + mobile, smsCode, 60 * SMS_LIFECYCLE_MIN);
+        redisService.set("SMS_CODE_" + mobile, smsCode, 360 * SMS_LIFECYCLE_MIN);
         return smsCode;
     }
 

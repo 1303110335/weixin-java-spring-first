@@ -15,4 +15,6 @@ public class WebMvcConfigurer extends WebMvcConfigurationSupport {
         registry.addInterceptor(new OneInterceptor()).addPathPatterns("/redis/**");
         super.addInterceptors(registry);
     }
+
+
 }

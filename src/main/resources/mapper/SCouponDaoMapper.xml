@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imooc.first.dao.SCouponDao">
+  <resultMap type="com.imooc.first.model.SCoupon" id="sCouponMap">
+    <result property="id" column="id"/>
+    <result property="appType" column="app_type"/>
+    <result property="title" column="title"/>
+    <result property="brief" column="brief"/>
+    <result property="desc" column="desc"/>
+    <result property="tag" column="tag"/>
+    <result property="expire" column="expire"/>
+    <result property="maxAcquire" column="max_acquire"/>
+    <result property="number" column="number"/>
+    <result property="ableNumber" column="able_number"/>
+    <result property="stage" column="stage"/>
+    <result property="type" column="type"/>
+    <result property="amount" column="amount"/>
+    <result property="cost" column="cost"/>
+    <result property="rate" column="rate"/>
+    <result property="rateDays" column="rate_days"/>
+    <result property="rateDaysPercent" column="rate_days_percent"/>
+    <result property="rateAmount" column="rate_amount"/>
+    <result property="image" column="image"/>
+    <result property="amountUpperLimit" column="amount_upper_limit"/>
+    <result property="amountLowerLimit" column="amount_lower_limit"/>
+    <result property="dayUpperLimit" column="day_upper_limit"/>
+    <result property="dayLowerLimit" column="day_lower_limit"/>
+    <result property="startTime" column="start_time"/>
+    <result property="endTime" column="end_time"/>
+    <result property="addTime" column="add_time"/>
+    <result property="addUserId" column="add_user_id"/>
+    <result property="modifyTime" column="modify_time"/>
+    <result property="modifyUserId" column="modify_user_id"/>
+    <result property="isDeleted" column="is_deleted"/>
+
+  </resultMap>
+
+  <select id="getByPrimaryKey" parameterType="Integer" resultMap="sCouponMap">
+    SELECT * FROM s_coupon WHERE is_deleted = 0 AND id = #{id}
+  </select>
+
+  <insert id="create" parameterType="com.imooc.first.model.SCoupon">
+    <selectKey resultType="Integer" order="AFTER" keyProperty="id">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    INSERT INTO s_coupon
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">id,</if>
+      <if test="appType != null">app_type,</if>
+      <if test="title != null">title,</if>
+      <if test="brief != null">brief,</if>
+      <if test="desc != null">`desc`,</if>
+      <if test="tag != null">tag,</if>
+      <if test="expire != null">expire,</if>
+      <if test="maxAcquire != null">max_acquire,</if>
+      <if test="number != null">`number`,</if>
+      <if test="ableNumber != null">able_number,</if>
+      <if test="stage != null">stage,</if>
+      <if test="type != null">`type`,</if>
+      <if test="amount != null">amount,</if>
+      <if test="cost != null">cost,</if>
+      <if test="rate != null">rate,</if>
+      <if test="image != null">image,</if>
+      <if test="amountUpperLimit != null">amount_upper_limit,</if>
+      <if test="amountLowerLimit != null">amount_lower_limit,</if>
+      <if test="dayUpperLimit != null">day_upper_limit,</if>
+      <if test="dayLowerLimit != null">day_lower_limit,</if>
+      <if test="startTime != null">start_time,</if>
+      <if test="endTime != null">end_time,</if>
+      <if test="addTime != null">add_time,</if>
+      <if test="addUserId != null">add_user_id,</if>
+      <if test="modifyTime != null">modify_time,</if>
+      <if test="modifyUserId != null">modify_user_id,</if>
+      <if test="isDeleted != null">is_deleted,</if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">#{id},</if>
+      <if test="appType != null">#{appType},</if>
+      <if test="title != null">#{title},</if>
+      <if test="brief != null">#{brief},</if>
+      <if test="desc != null">#{desc},</if>
+      <if test="tag != null">#{tag},</if>
+      <if test="expire != null">#{expire},</if>
+      <if test="maxAcquire != null">#{maxAcquire},</if>
+      <if test="number != null">#{number},</if>
+      <if test="ableNumber != null">#{ableNumber},</if>
+      <if test="stage != null">#{stage},</if>
+      <if test="type != null">#{type},</if>
+      <if test="amount != null">#{amount},</if>
+      <if test="cost != null">#{cost},</if>
+      <if test="rate != null">#{rate},</if>
+      <if test="image != null">#{image},</if>
+      <if test="amountUpperLimit != null">#{amountUpperLimit},</if>
+      <if test="amountLowerLimit != null">#{amountLowerLimit},</if>
+      <if test="dayUpperLimit != null">#{dayUpperLimit},</if>
+      <if test="dayLowerLimit != null">#{dayLowerLimit},</if>
+      <if test="startTime != null">#{startTime},</if>
+      <if test="endTime != null">#{endTime},</if>
+      <if test="addTime != null">now(),</if>
+      <if test="addUserId != null">#{addUserId},</if>
+      <if test="modifyTime != null">now(),</if>
+      <if test="modifyUserId != null">#{modifyUserId},</if>
+      <if test="isDeleted != null">0</if>
+    </trim>
+  </insert>
+
+  <update id="update" parameterType="com.imooc.first.model.SCoupon">
+    UPDATE s_coupon
+    <set>
+      <if test="appType != null">app_type = #{appType},</if>
+      <if test="title != null">title = #{title},</if>
+      <if test="brief != null">brief = #{brief},</if>
+      <if test="desc != null">`desc` = #{desc},</if>
+      <if test="tag != null">tag = #{tag},</if>
+      <if test="expire != null">expire = #{expire},</if>
+      <if test="maxAcquire != null">max_acquire = #{maxAcquire},</if>
+      <if test="number != null">`number` = #{number},</if>
+      <if test="ableNumber != null">able_number = #{ableNumber},</if>
+      <if test="stage != null">stage = #{stage},</if>
+      <if test="type != null">`type` = #{type},</if>
+      <if test="amount != null">amount = #{amount},</if>
+      <if test="cost != null">cost = #{cost},</if>
+      <if test="rate != null">rate = #{rate},</if>
+      <if test="image != null">image = #{image},</if>
+      <if test="amountUpperLimit != null">amount_upper_limit = #{amountUpperLimit},</if>
+      <if test="amountLowerLimit != null">amount_lower_limit = #{amountLowerLimit},</if>
+      <if test="dayUpperLimit != null">day_upper_limit = #{dayUpperLimit},</if>
+      <if test="dayLowerLimit != null">day_lower_limit = #{dayLowerLimit},</if>
+      <if test="startTime != null">start_time = #{startTime},</if>
+      <if test="endTime != null">end_time = #{endTime},</if>
+      <if test="modifyTime != null">modify_time = now(),</if>
+      <if test="modifyUserId != null">modify_user_id = #{modifyUserId},</if>
+    </set>
+    WHERE id = #{id}
+    AND is_deleted = 0
+  </update>
+
+  <delete id="delete" parameterType="Integer">
+    UPDATE s_coupon SET is_deleted = 1
+    WHERE id = #{id}
+  </delete>
+
+  <select id="count" parameterType="map" resultType="Integer">
+    SELECT count(id) FROM s_coupon WHERE 1 = 1 AND is_deleted = 0
+    <if test="id != null">
+      AND id = #{id}
+    </if>
+    <if test="ableNumber != null">
+      and able_number > #{ableNumber}
+    </if>
+    <if test="now != null">
+      and end_time >= #{now}
+    </if>
+  </select>
+
+  <select id="get" parameterType="map" resultMap="sCouponMap">
+    SELECT * FROM s_coupon WHERE 1 = 1 AND is_deleted = 0
+    <if test="id != null">
+      AND id = #{id}
+    </if>
+    <if test="ableNumber != null">
+      and able_number > #{ableNumber}
+    </if>
+    <if test="now != null">
+      and end_time >= #{now}
+    </if>
+    <if test="ids != null">
+      and id in
+      <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+        #{item}
+      </foreach>
+    </if>
+    limit 0, 1
+  </select>
+
+  <select id="getList" parameterType="map" resultMap="sCouponMap">
+    SELECT * FROM s_coupon WHERE 1 = 1 AND is_deleted = 0
+    <if test="id != null">
+      AND id = #{id}
+    </if>
+    <if test="ableNumber != null">
+      and able_number > #{ableNumber}
+    </if>
+    <if test="now != null">
+      and end_time >= #{now}
+    </if>
+    <if test="ids != null">
+      and id in
+      <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+        #{item}
+      </foreach>
+    </if>
+  </select>
+</mapper>

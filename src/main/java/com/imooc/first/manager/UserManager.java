@@ -47,7 +47,7 @@ public class UserManager {
         SUser sUser = sUserService.getByUsername(getSmsCodeReq.getMobile());
         logger.info("----------ym_ip地址--ymsmscode--" + getSmsCodeReq.getMobile() + "-----------"
                     + getSmsCodeReq.getIp());
-        if (sUser == null || sUser.getStatus() == 0) {
+        if (sUser != null && sUser.getStatus() == 0) {
             return BaseResp.create(ResultCode.ERROR_USER_UNLOGIN);
         }
 
@@ -99,7 +99,9 @@ public class UserManager {
 
         //判断用户是否注册
         if (user == null) {
-
+            sUserService.register(loginReq,
+                    VerifyUtils.isLong(loginReq.getSupperUserId()) ? Long.valueOf(loginReq.getSupperUserId()) : null,
+                    loginReq.getRegistrationId(), loginReq.getMobile());
         } else {
 
         }

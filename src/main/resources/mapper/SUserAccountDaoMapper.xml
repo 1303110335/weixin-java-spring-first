@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imooc.first.dao.SUserAccountDao">
+	<resultMap type="com.imooc.first.model.SUserAccount" id="sUserAccountMap">
+		<result property="id" column="id" />
+		<result property="userId" column="user_id" />
+		<result property="totalInvestCapital" column="total_invest_capital" />
+		<result property="totalInvestInterest" column="total_invest_interest" />
+		<result property="accountTotal" column="account_total" />
+		<result property="accountAble" column="account_able" />
+		<result property="accountFreeze" column="account_freeze" />
+		<result property="waitAmount" column="wait_amount" />
+		<result property="waitCapital" column="wait_capital" />
+		<result property="waitInterest" column="wait_interest" />
+		<result property="integration" column="integration" />
+		<result property="stoneMoney" column="stone_money" />
+		<result property="walletTotle" column="wallet_totle" />
+		<result property="walletEnableInterest" column="wallet_enable_interest" />
+		<result property="walletInterest" column="wallet_interest" />
+		<result property="walletInterestTotle" column="wallet_interest_totle" />
+		<result property="walletProductInterest" column="wallet_product_interest" />
+		<result property="walletLastInterestTime" column="wallet_last_interest_time" />
+		<result property="bkChance" column="bk_chance" />
+		<result property="toWallet" column="to_wallet" />
+		<result property="addTime" column="add_time" />
+		<result property="addUserId" column="add_user_id" />
+		<result property="modifyTime" column="modify_time" />
+		<result property="modifyUserId" column="modify_user_id" />
+
+	</resultMap>
+
+	<select id="getByPrimaryKey" parameterType="Long" resultMap="sUserAccountMap">
+		SELECT * FROM s_user_account WHERE id = #{id}
+	</select>
+
+	<!-- 锁定用户账户 -->
+	<select id="getByPrimaryKeyForLock" parameterType="Long"
+		resultMap="sUserAccountMap">
+		SELECT * FROM s_user_account WHERE id = #{id} for update
+	</select>
+	<!-- 锁定用户账户 -->
+	<select id="getByUserIdForLock" parameterType="Long" resultMap="sUserAccountMap">
+		SELECT * FROM s_user_account WHERE user_id = #{userId} for update
+	</select>
+	<insert id="create" parameterType="com.imooc.first.model.SUserAccount">
+		<selectKey resultType="Long" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		INSERT INTO s_user_account
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">id,</if>
+			<if test="userId != null">user_id,</if>
+			<if test="totalInvestCapital != null">total_invest_capital,</if>
+			<if test="totalInvestInterest != null">total_invest_interest,</if>
+			<if test="accountTotal != null">account_total,</if>
+			<if test="accountAble != null">account_able,</if>
+			<if test="accountFreeze != null">account_freeze,</if>
+			<if test="waitAmount != null">wait_amount,</if>
+			<if test="waitCapital != null">wait_capital,</if>
+			<if test="waitInterest != null">wait_interest,</if>
+			<if test="integration != null">integration,</if>
+			<if test="stoneMoney != null">stone_money,</if>
+			<if test="walletTotle != null">wallet_totle,</if>
+			<if test="walletEnableInterest != null">wallet_enable_interest,</if>
+			<if test="walletInterest != null">wallet_interest,</if>
+			<if test="walletInterestTotle != null">wallet_interest_totle,</if>
+			<if test="walletProductInterest != null">wallet_product_interest,</if>
+			<if test="walletLastInterestTime != null">wallet_last_interest_time,</if>
+			<if test="bkChance != null">bk_chance,</if>
+			<if test="toWallet != null">to_wallet,</if>
+			<if test="addTime != null">add_time,</if>
+			<if test="addUserId != null">add_user_id,</if>
+			<if test="modifyTime != null">modify_time,</if>
+			<if test="modifyUserId != null">modify_user_id,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">#{id},</if>
+			<if test="userId != null">#{userId},</if>
+			<if test="totalInvestCapital != null">#{totalInvestCapital},</if>
+			<if test="totalInvestInterest != null">#{totalInvestInterest},</if>
+			<if test="accountTotal != null">#{accountTotal},</if>
+			<if test="accountAble != null">#{accountAble},</if>
+			<if test="accountFreeze != null">#{accountFreeze},</if>
+			<if test="waitAmount != null">#{waitAmount},</if>
+			<if test="waitCapital != null">#{waitCapital},</if>
+			<if test="waitInterest != null">#{waitInterest},</if>
+			<if test="integration != null">#{integration},</if>
+			<if test="stoneMoney != null">#{stoneMoney},</if>
+			<if test="walletTotle != null">#{walletTotle},</if>
+			<if test="walletEnableInterest != null">#{walletEnableInterest},</if>
+			<if test="walletInterest != null">#{walletInterest},</if>
+			<if test="walletInterestTotle != null">#{walletInterestTotle},</if>
+			<if test="walletProductInterest != null">#{walletProductInterest},</if>
+			<if test="walletLastInterestTime != null">#{walletLastInterestTime},</if>
+			<if test="bkChance != null">#{bkChance},</if>
+			<if test="toWallet != null">#{toWallet},</if>
+			<if test="addTime != null">now(),</if>
+			<if test="addUserId != null">#{addUserId},</if>
+			<if test="modifyTime != null">now(),</if>
+			<if test="modifyUserId != null">#{modifyUserId}</if>
+		</trim>
+	</insert>
+
+	<update id="update" parameterType="com.imooc.first.model.SUserAccount">
+		UPDATE s_user_account
+		<set>
+			<if test="userId != null">user_id = #{userId},</if>
+			<if test="totalInvestCapital != null">total_invest_capital = #{totalInvestCapital},</if>
+			<if test="totalInvestInterest != null">total_invest_interest = #{totalInvestInterest},</if>
+			<if test="accountTotal != null">account_total = #{accountTotal},</if>
+			<if test="accountAble != null">account_able = #{accountAble},</if>
+			<if test="accountFreeze != null">account_freeze = #{accountFreeze},</if>
+			<if test="waitAmount != null">wait_amount = #{waitAmount},</if>
+			<if test="waitCapital != null">wait_capital = #{waitCapital},</if>
+			<if test="waitInterest != null">wait_interest = #{waitInterest},</if>
+			<if test="integration != null">integration = #{integration},</if>
+			<if test="stoneMoney != null">stone_money = #{stoneMoney},</if>
+			<if test="walletTotle != null">wallet_totle = #{walletTotle},</if>
+			<if test="walletEnableInterest != null">wallet_enable_interest = #{walletEnableInterest},</if>
+			<if test="walletInterest != null">wallet_interest = #{walletInterest},</if>
+			<if test="walletInterestTotle != null">wallet_interest_totle = #{walletInterestTotle},</if>
+			<if test="walletProductInterest != null">wallet_product_interest = #{walletProductInterest},</if>
+			<if test="walletLastInterestTime != null">wallet_last_interest_time = #{walletLastInterestTime},</if>
+			<if test="bkChance != null">bk_chance = #{bkChance},</if>
+			<if test="toWallet != null">to_wallet = #{toWallet},</if>
+			<if test="modifyTime != null">modify_time = now(),</if>
+			<if test="modifyUserId != null">modify_user_id = #{modifyUserId},</if>
+		</set>
+		WHERE id = #{id}
+
+	</update>
+
+	<select id="count" parameterType="map" resultType="Integer">
+		SELECT count(id) FROM s_user_account WHERE 1 = 1
+		<if test="id != null">
+			AND id = #{id}
+		</if>
+		<if test="gtAmount != null">
+			AND wallet_totle &gt; #{gtAmount}
+		</if>
+
+	</select>
+
+	<select id="get" parameterType="map" resultMap="sUserAccountMap">
+		SELECT * FROM s_user_account WHERE 1 = 1
+		<if test="id != null">
+			AND id = #{id}
+		</if>
+		limit 0, 1
+	</select>
+
+	<select id="getList" parameterType="map" resultMap="sUserAccountMap">
+		SELECT * FROM s_user_account WHERE 1 = 1
+		<if test="id != null">
+			AND id = #{id}
+		</if>
+	</select>
+
+	<select id="accountAssets" parameterType="map"
+		resultType="com.imooc.first.api.resp.account.AccountAssetsResp">
+		select sua.wallet_totle as walletTotle,
+		(select COALESCE(suwi.interest,0) from s_user_wallet_interest suwi where
+		suwi.user_id = sua.user_id and
+		DATEDIFF(curdate(),suwi.interest_time) = 1) yesterdayInterest,
+		(select COALESCE(sum(suwi.interest),0) from s_user_wallet_interest suwi where
+		suwi.user_id = sua.user_id)
+		accumulationTotle
+		from s_user_account sua
+		WHERE 1 = 1
+		<if test="userId != null">
+			AND sua.user_id = #{userId}
+		</if>
+		limit 0, 1
+	</select>
+
+	<select id="getByUserId" parameterType="map" resultMap="sUserAccountMap">
+
+		SELECT * from s_user_account where user_id=#{userId}
+	</select>
+
+	<select id="getWalletLeagueCurrentInvest" parameterType="map"
+		resultType="com.imooc.first.api.resp.platform.PlatformWalletLeagueData">
+		select
+		@rowno:=@rowno+1 as top,
+		su.username as mobile,
+		temp.amount as amount
+		from (select @rowno:=${pageNo}) t, s_user su
+		INNER JOIN (
+		SELECT
+		sua.user_id AS userId,
+		sua.wallet_totle AS amount
+		FROM
+		s_user_account sua
+		GROUP BY
+		sua.user_id
+		ORDER BY
+		sua.wallet_totle DESC
+		<if test="pageNo != null and pageNo != -10 and limit != null">
+			limit ${pageNo}, ${limit}
+		</if>
+		) temp on temp.userId = su.id
+		ORDER BY
+		temp.amount DESC
+	</select>
+
+	<select id="getWalletAccountRankList" parameterType="map"
+		resultType="com.imooc.first.model.YdjrUserAccount">
+		SELECT u.username AS userName,
+		u.real_name as realName,a.user_id as userId,a.wallet_totle as walletTotal,
+		a.wallet_enable_interest as walletEnableInterest,a.wallet_interest as
+		walletInterest
+		from s_user_account a,s_user u
+		where a.user_id =u.id
+		order by wallet_totle desc
+		<if test="pageNo != null and pageNo != -10 and limit != null">
+			limit ${pageNo}, ${limit}
+		</if>
+	</select>
+
+	<select id="stock" resultType="java.math.BigDecimal">
+		select SUM(a.wallet_totle) as stock from s_user u,s_user_account a where
+		u.real_name_auth =1 and u.id = a.user_id
+	</select>
+	<select id="registerTotal" resultType="java.lang.Integer">
+		SELECT count(*) registerTotal from s_user u
+	</select>
+	<select id="realAuthUsers" resultType="java.lang.Integer">
+		SELECT count(*) realAuthUsers from s_user u where u.real_name_auth =1
+	</select>
+
+</mapper>

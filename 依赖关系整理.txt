@@ -1,0 +1,28 @@
+
+spring-boot-starter-web:
+	spring-boot-starter
+	spring-boot-starter-json
+	spring-boot-starter-tomcat
+	hibernate-validator
+	spring-web
+	spring-webmvc
+
+mysql-connector-java
+druid
+spring-jdbc
+
+mybatis-spring-boot-starter:
+	mybatis-spring-boot
+	spring-boot-starter
+	spring-boot-starter-jdbc
+	mybatis-spring-boot-autoconfigure
+	mybatis
+	mybatis-spring
+
+spring-boot-starter-test:
+httpclient:
+fastjson:
+spring-boot-starter-logging:
+spring-boot-starter-data-redis
+spring-boot-starter-data-jpa
+

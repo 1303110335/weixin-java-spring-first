@@ -19,7 +19,7 @@ spring:
 
 masterdb:
   druid:
-    url: jdbc:mysql://rm-bp1wp84ot5b11c6q1o.mysql.rds.aliyuncs.com:3306/womaodev?useUnicode=true&autoReconnect=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
+    url: jdbc:mysql://rm-bp1wp84ot5b11c6q1o.mysql.rds.aliyuncs.com:3306/womao0507xieyi?useUnicode=true&autoReconnect=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
     username: womaomain
     password: '@Womaojr'
 #    url: jdbc:mysql://192.168.33.10:3306/test?useUnicode=true&characterEncoding=utf8&useSSL=false

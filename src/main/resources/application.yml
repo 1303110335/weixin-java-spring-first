@@ -14,3 +14,7 @@ type_alias_package: com.imooc.first.model
 logging:
   level:
     com.imooc.first.dao: DEBUG
+
+server:
+  tomcat:
+    basedir: C:/Users/msi/AppData/Local/Temp/tomcat

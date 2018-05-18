@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imooc.first.dao.SCouponPoolPrizeDao">
+  <resultMap type="com.imooc.first.model.SCouponPoolPrize" id="sCouponPoolPrizeMap">
+    <result property="id" column="id"/>
+    <result property="poolId" column="pool_id"/>
+    <result property="couponId" column="coupon_id"/>
+    <result property="prizeMustScene" column="prize_must_scene"/>
+    <result property="prizeOrder" column="prize_order"/>
+    <result property="prizeStatus" column="prize_status"/>
+    <result property="prizeChance" column="prize_chance"/>
+    <result property="addTime" column="add_time"/>
+    <result property="addUserId" column="add_user_id"/>
+    <result property="modifyTime" column="modify_time"/>
+    <result property="modifyUserId" column="modify_user_id"/>
+    <result property="isDeleted" column="is_deleted"/>
+
+  </resultMap>
+
+  <select id="getByPrimaryKey" parameterType="Integer" resultMap="sCouponPoolPrizeMap">
+    SELECT * FROM s_coupon_pool_prize WHERE is_deleted = 0 AND id = #{id}
+  </select>
+
+  <insert id="create" parameterType="com.imooc.first.model.SCouponPoolPrize">
+    <selectKey resultType="Integer" order="AFTER" keyProperty="id">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    INSERT INTO s_coupon_pool_prize
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">id,</if>
+      <if test="poolId != null">pool_id,</if>
+      <if test="couponId != null">coupon_id,</if>
+      <if test="prizeMustScene != null">prize_must_scene,</if>
+      <if test="prizeOrder != null">prize_order,</if>
+      <if test="prizeStatus != null">prize_status,</if>
+      <if test="prizeChance != null">prize_chance,</if>
+      <if test="addTime != null">add_time,</if>
+      <if test="addUserId != null">add_user_id,</if>
+      <if test="modifyTime != null">modify_time,</if>
+      <if test="modifyUserId != null">modify_user_id,</if>
+      <if test="isDeleted != null">is_deleted,</if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">#{id},</if>
+      <if test="poolId != null">#{poolId},</if>
+      <if test="couponId != null">#{couponId},</if>
+      <if test="prizeMustScene != null">#{prizeMustScene},</if>
+      <if test="prizeOrder != null">#{prizeOrder},</if>
+      <if test="prizeStatus != null">#{prizeStatus},</if>
+      <if test="prizeChance != null">#{prizeChance},</if>
+      <if test="addTime != null">now(),</if>
+      <if test="addUserId != null">#{addUserId},</if>
+      <if test="modifyTime != null">now(),</if>
+      <if test="modifyUserId != null">#{modifyUserId},</if>
+      <if test="isDeleted != null">0</if>
+    </trim>
+  </insert>
+
+  <update id="update" parameterType="com.imooc.first.model.SCouponPoolPrize">
+    UPDATE s_coupon_pool_prize
+    <set>
+      <if test="poolId != null">pool_id = #{poolId},</if>
+      <if test="couponId != null">coupon_id = #{couponId},</if>
+      <if test="prizeMustScene != null">prize_must_scene = #{prizeMustScene},</if>
+      <if test="prizeOrder != null">prize_order = #{prizeOrder},</if>
+      <if test="prizeStatus != null">prize_status = #{prizeStatus},</if>
+      <if test="prizeChance != null">prize_chance = #{prizeChance},</if>
+      <if test="modifyTime != null">modify_time = now(),</if>
+      <if test="modifyUserId != null">modify_user_id = #{modifyUserId},</if>
+    </set>
+    WHERE id = #{id}
+    AND is_deleted = 0
+  </update>
+
+  <delete id="delete" parameterType="Integer">
+    UPDATE s_coupon_pool_prize SET is_deleted = 1
+    WHERE id = #{id}
+  </delete>
+
+  <select id="count" parameterType="map" resultType="Integer">
+    SELECT count(id) FROM s_coupon_pool_prize WHERE 1 = 1 AND is_deleted = 0
+    <if test="id != null">
+      AND id = #{id}
+    </if>
+
+  </select>
+
+  <select id="get" parameterType="map" resultMap="sCouponPoolPrizeMap">
+    SELECT * FROM s_coupon_pool_prize WHERE 1 = 1 AND is_deleted = 0
+    <if test="id != null">
+      AND id = #{id}
+    </if>
+    <if test="poolId != null">
+      AND pool_id = #{poolId}
+    </if>
+    <if test="couponId != null">
+      AND coupon_id = #{couponId}
+    </if>
+    <if test="prizeStatus != null">
+      AND prize_status = #{prizeStatus}
+    </if>
+    ORDER BY prize_order ASC
+    limit 0, 1
+  </select>
+
+  <select id="getList" parameterType="map" resultMap="sCouponPoolPrizeMap">
+    SELECT * FROM s_coupon_pool_prize WHERE 1 = 1 AND is_deleted = 0
+    <if test="id != null">
+      AND id = #{id}
+    </if>
+    <if test="poolId != null">
+      AND pool_id = #{poolId}
+    </if>
+    <if test="couponId != null">
+      AND coupon_id = #{couponId}
+    </if>
+    <if test="prizeStatus != null">
+      AND prize_status = #{prizeStatus}
+    </if>
+    ORDER BY prize_order ASC
+  </select>
+</mapper>
